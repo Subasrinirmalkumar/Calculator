@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 0; padding: 20px; background-color: #f4f4f4; }
+        .calculator { max-width: 400px; margin: auto; padding: 20px; background-color: #fff; border-radius: 8px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); }
+        input[type="number"], select { padding: 8px; margin: 5px; width: calc(100% - 18px); }
+        button { padding: 10px 20px; background-color: #4CAF50; color: white; border: none; cursor: pointer; }
+        button:hover { background-color: #45a049; }
+        .result { font-size: 1.5em; margin-top: 20px; }
+    </style>
+</head>
+<body>
+
+    <div class="calculator">
+        <h2>Calculator</h2>
+        <form action="/calculate" method="POST">
+            <label for="num1">Number 1:</label>
+            <input type="number" name="num1" id="num1" value="{{ num1 }}" required>
+
+            <label for="num2">Number 2:</label>
+            <input type="number" name="num2" id="num2" value="{{ num2 }}" required>
+
+            <label for="operation">Operation:</label>
+            <select name="operation" id="operation" required>
+                <option value="add" {% if operation == 'add' %}selected{% endif %}>Add</option>
+                <option value="subtract" {% if operation == 'subtract' %}selected{% endif %}>Subtract</option>
+                <option value="divison" {% if operation == 'divison' %}selected{% endif %}>Divison</option>
+                <option value="multiplication" {% if operation == 'multiplication' %}selected{% endif %}>Multiplication</option>
+            </select>
+
+            <button type="submit">Calculate</button>
+        </form>
+
+        {% if result is not none %}
+            <div class="result">
+                <p>Result: {{ result }}</p>
+            </div>
+        {% endif %}
+    </div>
+
+</body>
+</html>
